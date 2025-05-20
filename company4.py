@@ -1,24 +1,32 @@
 import csv
-from collections import defaultdict
 import matplotlib.pyplot as plt
-def start4():
-    with open("/home/dwipendu/Desktop/Project2/Data/second_task.csv",mode='r') as task_file:
-        reader=csv.DictReader(task_file)
-        dict_data=defaultdict(lambda:defaultdict(int))
-        for row in reader:
-            if int(row['CompanyRegistrationdate_date'][:4])>2015:
-                dict_data[int(row['CompanyRegistrationdate_date'][:4])][row['CompanyIndustrialClassification']]+=1
+from collections import defaultdict
 
-        dict_data=dict(sorted(dict_data.items()))             
+
+COMPANY_REGISTRATION_DATE = 'CompanyRegistrationdate_date'
+COMPANY_INDUSTRIAL_CLASSIFICATION = 'CompanyIndustrialClassification'
+
+
+def start4(file_path):
+    with open(file_path, mode='r') as task_file:
+        reader = csv.DictReader(task_file)
+        dict_data = defaultdict(lambda: defaultdict(int))
+        for row in reader:
+            if int(row[COMPANY_REGISTRATION_DATE][:4]) > 2015:
+                dict_data[int(row[COMPANY_REGISTRATION_DATE][:4])
+                          ][row[COMPANY_INDUSTRIAL_CLASSIFICATION]] += 1
+
+        dict_data = dict(sorted(dict_data.items()))
         for item in dict_data:
-            dict_data[item]=dict(sorted(dict_data[item].items(),key= lambda X:X[1])[:-6:-1])
+            dict_data[item] = dict(
+                sorted(dict_data[item].items(), key=lambda X: X[1])[:-6:-1])
         # all_year=sorted(dict_data.keys())
         # all_sector=sorted({count for sect in dict_data.values() for count in sect})
-        #print(dict_data)
-        plot_sector_trends(dict_data)
+        # print(dict_data)
+        return dict_data
 
-        
-def plot_sector_trends(sector_data):
+
+def graph4(sector_data):
     years = sorted(sector_data.keys())
     x_indexes = list(range(len(years)))
     bar_width = 0.15
@@ -29,7 +37,8 @@ def plot_sector_trends(sector_data):
     all_sectors = sorted(all_sectors)
 
     color_list = plt.cm.tab20.colors
-    sector_colors = {sector: color_list[i % len(color_list)] for i, sector in enumerate(all_sectors)}
+    sector_colors = {sector: color_list[i % len(
+        color_list)] for i, sector in enumerate(all_sectors)}
     sector_year_values = {sector: [] for sector in all_sectors}
     sectors_per_year = []
 
@@ -45,7 +54,6 @@ def plot_sector_trends(sector_data):
             else:
                 sector_year_values[sector].append(None)
 
-    
     print(sector_year_values)
     print("*"*90)
     print(sectors_per_year)
@@ -61,7 +69,8 @@ def plot_sector_trends(sector_data):
                 positions.append(pos)
                 actual_values.append(val)
         if positions:
-            plt.bar(positions, actual_values, width=bar_width, label=sector, color=sector_colors[sector])
+            plt.bar(positions, actual_values, width=bar_width,
+                    label=sector, color=sector_colors[sector])
 
     plt.xticks(x_indexes, years)
     plt.xlabel("Year")
@@ -70,12 +79,16 @@ def plot_sector_trends(sector_data):
     plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
     plt.tight_layout()
     plt.show()
-start4()
 
 
+def execute4():
+    file_path = "/home/dwipendu/Desktop/Project2/Data/second_task.csv"
+    dict_data = start4(file_path)
+    graph4(dict_data)
 
 
-
+if __name__ == "__main__":
+    execute4()
 
 
 # year=['2016','2017','2018','2019']
@@ -84,14 +97,13 @@ start4()
 # w=0.4
 # bar1=[i for i in range(len(year))]
 # print(bar1)
-# bar2=[i+w for i in bar1] 
+# bar2=[i+w for i in bar1]
 # plt.bar(bar1,b,w,label='consumer')
 # plt.bar(bar2,g,w,label='consumer')
 
 # bar1=[i+0.2 for i in range(len(year))]
 # plt.xticks(bar1,year)
 # plt.show()
-
 
 
 # # for y in year:
