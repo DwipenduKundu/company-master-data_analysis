@@ -119,7 +119,7 @@ An example of a Grouped Bar Plot is [here](https://matplotlib.org/3.1.1/gallery/
 ##### 1 Histogram of Authorized Cap
 
 
-Open comapny1.py and run the script start1() function will take care of everything.
+Open comapny1.py and run the script execute1() function will take care of everything.
 
 ![](./output/Figure_1.png)
 
@@ -127,17 +127,17 @@ Open comapny1.py and run the script start1() function will take care of everythi
 
 ##### 2. Bar Plot of company registration by year
 
-Open comapny2.py and run the script start2() function will take care of everything.
+Open comapny2.py and run the script execute2() function will take care of everything.
 ![](./output/Figure_2.png)
 
 
 ##### 3. Company registration in the year 2015 by the district.
 
-Open comapny3.py and run the script start3() function will take care of everything.
+Open comapny3.py and run the script execute3() function will take care of everything.
 
 ![](./output/Figure_3.png)
 
 ##### 4. Grouped Bar Plot.
 
-Open comapny4.py and run the script start4() function will take care of everything.
+Open comapny4.py and run the script execute4() function will take care of everything.
 ![](./output/Figure_4.png)
